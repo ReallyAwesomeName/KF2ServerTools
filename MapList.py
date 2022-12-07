@@ -6,6 +6,7 @@ class MapList:
     """MapList contains lists of MapObjects\n
     [new_maps], [workshop_maps], [official_maps]
     """
+
     def __init__(self) -> None:
         """
         Args:
@@ -16,12 +17,10 @@ class MapList:
         """
         self.new_maps = []
         self.workshop_maps = []
-        # self.lane_maps = [] # don't need?
         self.official_maps = []
 
     def build_cur_map_list(self):
-        """Build current (unupdated) map lists
-        """
+        """Build current (unupdated) map lists"""
         # read unupdated mapdb
         with open("mapdb.txt", "r") as f:
             curmaps = f.readlines()
@@ -44,8 +43,6 @@ class MapList:
     def find_new_maps(self):
         """Find the maps to be added"""
 
-        # FIXME: DO THIS NEXT
-
         topdir = "T:\\Desktop\\workshop_backup_testing\\content\\232090"
         exten = ".kfm"
 
@@ -56,52 +53,54 @@ class MapList:
         for dirpath, dirnames, files in os.walk(topdir, topdown=False):
             for name in files:
                 if name.endswith(exten):
-                    if name not in self.workshop_maps:
-                        # must be new
+                    # FIXME: huh? Is this thing working?
+                    # compare name to each workshop_maps.map_name
+                    # assume new until it's found
+                    this_map_new = True
+                    for wm in self.workshop_maps:
+                        if name in getattr(wm, "map_name"):
+                            # map name found, NOT a new map
+                            this_map_new = False
+                            # break and check next name
+                            break
+
+                    if this_map_new:  # is still True
+                        # checked name against all workshop_maps.map_name, no match found
+                        # make new MapObject and add it to MapList.new_maps
+
                         # make map_summary
                         this_map_summary = (
                             f"[{name[:-4]} KFMapSummary]\nMapName={name[:-4]}\n"
                         )
                         # get workshop_id from path
-                        split_path = dirpath.split('\\')
-                        this_workshop_id = split_path[split_path.index('content')+2]
-                        
+                        split_path = dirpath.split("\\")
+                        this_workshop_id = split_path[split_path.index("content") + 2]
+
                         # create and add MapObject to MapList
                         this_map = MapObject(
-                            map_name=name, map_new=True, workshop_id=this_workshop_id, map_summary=this_map_summary
+                            map_name=name,
+                            map_new=True,
+                            workshop_id=this_workshop_id,
+                            map_summary=this_map_summary,
                         )
                         self.new_maps.append(this_map)
 
         outmsg = f"\nNew maps found:\n{self.new_maps}\n"
         return print(outmsg)
 
-    def update_workshop_map_list(self, workshop_maps_to_update, new_maps_to_add):
-        """Add [new_maps_to_add] to [workshop_maps_to_update]
-
-        Args:
-            workshop_maps_to_update (list): unupdated list of workshop maps
-            new_maps_to_add (list): maps being added
-        Returns:
-            Updated list of workshop maps
-        """
-
-        # FIXME: ??
-
-        # add [new_maps_to_add] to [workshop_maps_to_update]
-        workshop_maps_to_update += [
-            workshop_maps_to_update.append(map)
-            for map in new_maps_to_add
-            if map not in workshop_maps_to_update
-        ]
-
-        return workshop_maps_to_update  # now updated
+    def update_workshop_map_list(self):
+        """Adds self.new_maps to self.workshop_maps"""
+        [self.workshop_maps.append(map) for map in self.new_maps]
+        outmsg = "Added new_maps to workshop_maps"
+        return print(outmsg)
 
 
 class MapObject:
-    def __init__(self, map_name, map_type, map_new, workshop_id, map_summary) -> None:
-        self.map_name = ""
-        self.map_type = ""
-        self.map_new = False
-        self.workshop_id = 0
-        self.map_summary = ""
-
+    def __init__(
+        self, map_name="", map_type="", map_new=False, workshop_id=0, map_summary=""
+    ) -> None:
+        self.map_name = map_name
+        self.map_type = map_type
+        self.map_new = map_new
+        self.workshop_id = workshop_id
+        self.map_summary = map_summary
