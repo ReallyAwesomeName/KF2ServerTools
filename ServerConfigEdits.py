@@ -10,13 +10,7 @@ from datetime import date
 from MapList import MapList
 
 
-def update_map_db(maplist: MapList):
-    """Update the db of current maps"""
-    
-    pass
-
-
-def edit_KFEngine():
+def update_kfengine(maplist: MapList):
     """Make necessary edits to PCServer-KFEngine.ini"""
     # Need to:
     #   Add entry to [OnlineSubsystemSteamworks.KFWorkshopSteamworks]
@@ -24,15 +18,21 @@ def edit_KFEngine():
     pass
 
 
-def edit_KFGame():
+def update_kfgame(maplist: MapList):
     """Make necessary edits to PCServer-KFGame.ini"""
     # Need to:
     #   Add [<mapname> KFMapSummary]
     #       MapName=<mapname>
     #   Add to Map Cycle
-
     # FIXME: MAKE THIS EDIT THE FILE
+    # TODO: MAKE BACKUPS OF ALL EDITED FILES
+    # TODO: SETUP LOGGING SOMEWHERE
 
+    # get each map summary and add it to PCServer-KFGame.ini
+    for new_map_index in range(len(maplist.new_maps)):
+        map_summary = getattr(maplist.new_maps[new_map_index], 'map_summary')
+        #TODO: FINISH THIS PART
+    
     # print KFMapSummary list
     [print(f"[{x} KFMapSummary]\nMapName={x}\n") for x in sorted(MapList.new_maps)]
     print("\n\n")
@@ -44,7 +44,13 @@ def edit_KFGame():
     print("\n\n")
 
 
-def edit_server_info():
+def update_map_db(maplist: MapList):
+    """Update the db of current maps"""
+    
+    pass
+
+
+def update_server_info(maplist: MapList):
     """Edit ServerInfo.md to reflect map list changes"""
 
     # FIXME: MAKE THIS EDIT THE FILE
@@ -80,13 +86,27 @@ def edit_server_info():
     print(f"\nTotal Maps: {total}")
     print("```\n")
 
+def push_server_info():
+    """Add, commit, push updated ServerInfo.md
+    """
+    pass
 
 def map_update_driver():
     """Driver
     Find the maps that were added and perform necessary edits to
     PCServer-KFEngine.ini, PCServer-KFGame.ini and ServerInfo.md
     """
-    pass
+    Server_Maps = MapList()
+    Server_Maps.build_cur_map_list()
+    Server_Maps.find_new_maps()
+    Server_Maps.update_workshop_map_list()
+    update_kfengine(Server_Maps)
+    update_kfgame(Server_Maps)
+    update_server_info(Server_Maps)
+    update_map_db(Server_Maps)
+    push_server_info()
+    
+    return
 
 
 # CLI

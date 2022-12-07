@@ -38,7 +38,7 @@ class MapList:
                 thismap.map_type = "om"
                 self.official_maps.append(thismap)
         outmsg = f"\nBuilt current workshop_maps:\n{self.workshop_maps}\nBuilt current official_maps:\n{self.official_maps}\n"
-        return print(outmsg)
+        return
 
     def find_new_maps(self):
         """Find the maps to be added"""
@@ -86,13 +86,13 @@ class MapList:
                         self.new_maps.append(this_map)
 
         outmsg = f"\nNew maps found:\n{self.new_maps}\n"
-        return print(outmsg)
+        return
 
     def update_workshop_map_list(self):
         """Adds self.new_maps to self.workshop_maps"""
         [self.workshop_maps.append(map) for map in self.new_maps]
         outmsg = "Added new_maps to workshop_maps"
-        return print(outmsg)
+        return
 
 
 class MapObject:
