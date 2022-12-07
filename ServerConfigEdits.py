@@ -7,67 +7,12 @@
 import argparse
 import os
 from datetime import date
+from MapList import MapList
 
 
-class MapList:
-    def __init__(self, new_maps, workshop_maps, lane_maps, official_maps) -> None:
-        """
-        Args:
-            new_maps ([MapObject])
-            workshop_maps ([MapObject])
-            lane_maps ([MapObject])
-            official_maps ([MapObject])
-        """
-        self.new_maps = new_maps
-        self.workshop_maps = workshop_maps
-        self.lane_maps = lane_maps
-        self.official_maps = official_maps
-
-
-class MapObject:
-    def __init__(self) -> None:
-        self.map_name = ""
-        self.map_type = ""
-        self.map_new = False
-        self.workshop_id = 0
-        self.map_summary = ""
-
-
-def update_workshop_map_list(workshop_maps_to_update, new_maps_to_add):
-    """Add [new_maps_to_add] to [workshop_maps_to_update]
-
-    Args:
-        workshop_maps_to_update (list): unupdated list of workshop maps
-        new_maps_to_add (list): maps being added
-    Returns:
-        Updated list of workshop maps
-    """
-
-    # add [new_maps_to_add] to [workshop_maps_to_update]
-    workshop_maps_to_update += [
-        workshop_maps_to_update.append(map)
-        for map in new_maps_to_add
-        if map not in workshop_maps_to_update
-    ]
-
-    return workshop_maps_to_update  # now updated
-
-
-def update_map_db():
+def update_map_db(maplist: MapList):
     """Update the db of current maps"""
-    pass
-
-
-def find_new_maps():
-    """Find the maps that were added"""
-    # FIXME: DO THIS NEXT
-    topdir = "T:\\Desktop\\workshop_backup_testing\\content\\232090"
-    exten = ".kfm"
-
-    for dirpath, dirnames, files in os.walk(topdir, topdown=False):
-        for name in files:
-            pass
-
+    
     pass
 
 
