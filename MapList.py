@@ -1,4 +1,6 @@
 # MapList and MapObject classes
+# https://github.com/ReallyAwesomeName/KF2ServerTools
+
 import os
 
 

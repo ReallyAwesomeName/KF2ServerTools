@@ -1,13 +1,16 @@
 # Fully automate KF2 server map update process
 # https://github.com/ReallyAwesomeName/KF2ServerTools
 
-# TODO: Actually make the ini edits
-# TODO: Make into CLI script
 
 import argparse
 import os
 from datetime import date
+from shutil import copy
 from MapList import MapList
+import logging
+from logging.handlers import RotatingFileHandler
+
+# TODO: ADD LOGGING
 
 
 def update_kfengine(maplist: MapList):
@@ -15,6 +18,12 @@ def update_kfengine(maplist: MapList):
     # Need to:
     #   Add entry to [OnlineSubsystemSteamworks.KFWorkshopSteamworks]
     #   ServerSubscribedWorkshopItems=1208883070 // 1 KF-Corridor
+    for new_map_index in range(len(maplist.new_maps)):
+        map_id = getattr(maplist.new_maps[new_map_index], "workshop_id")
+        map_name = getattr(maplist.new_maps[new_map_index], "map_name")
+        map_steamworks_entry = f"ServerSubscribedWorkshopItems={map_id} // {map_name}"
+        # TODO: copy file for backup then insert steamworks entry
+
     pass
 
 
@@ -30,9 +39,9 @@ def update_kfgame(maplist: MapList):
 
     # get each map summary and add it to PCServer-KFGame.ini
     for new_map_index in range(len(maplist.new_maps)):
-        map_summary = getattr(maplist.new_maps[new_map_index], 'map_summary')
-        #TODO: FINISH THIS PART
-    
+        map_summary_entry = getattr(maplist.new_maps[new_map_index], "map_summary")
+        # TODO: FINISH THIS PART
+
     # print KFMapSummary list
     [print(f"[{x} KFMapSummary]\nMapName={x}\n") for x in sorted(MapList.new_maps)]
     print("\n\n")
@@ -46,7 +55,7 @@ def update_kfgame(maplist: MapList):
 
 def update_map_db(maplist: MapList):
     """Update the db of current maps"""
-    
+
     pass
 
 
@@ -86,10 +95,11 @@ def update_server_info(maplist: MapList):
     print(f"\nTotal Maps: {total}")
     print("```\n")
 
+
 def push_server_info():
-    """Add, commit, push updated ServerInfo.md
-    """
+    """Add, commit, push updated ServerInfo.md"""
     pass
+
 
 def map_update_driver():
     """Driver
@@ -105,7 +115,7 @@ def map_update_driver():
     update_server_info(Server_Maps)
     update_map_db(Server_Maps)
     push_server_info()
-    
+
     return
 
 
