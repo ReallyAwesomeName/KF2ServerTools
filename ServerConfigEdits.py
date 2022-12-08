@@ -139,6 +139,9 @@ def map_update_driver():
 
     return
 
+def cmd_helper():
+    pass
+
 
 # CLI
 if __name__ == "__main__":
@@ -150,16 +153,23 @@ if __name__ == "__main__":
         dest="action",
     )
 
-    # action: mapupdate
+    # action: updatemaps
     newmap_parser = subparsers.add_parser(
-        "mapupdate",
+        "updatemaps",
         help="Update server maps",
+    )
+    
+    cmd_parser = subparsers.add_parser(
+        "cmd",
+        help="Find and use commands",
     )
 
     args = parser.parse_args()
 
     try:
-        if args.action == "mapupdate":
+        if args.action == "updatemaps":
             map_update_driver()
+        if args.action == "cmd":
+            cmd_helper()
     except AttributeError:
         raise AttributeError
