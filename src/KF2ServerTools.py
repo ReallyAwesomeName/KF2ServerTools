@@ -1,29 +1,32 @@
 #
 # KF2ServerTools.py
-#
 # Main driver code
 #
+# Author: Rin | Discord: Rin#0304
 # https://github.com/ReallyAwesomeName/KF2ServerTools
-	
-    # KF2ServerTools - Tools for managing a Dedicated Killing Floor 2 Server
-    # Copyright (C) 2022  Rin
-	
-	# This file is a part of KF2ServerTools
+#
+# =========================================================================== #
+#                                                                             #
+#   KF2ServerTools - Tools for managing a Dedicated Killing Floor 2 Server    #
+#   Copyright (C) 2022  Rin                                                   #
+#                                                                             #
+#   This file is a part of KF2ServerTools                                     #
+#                                                                             #
+#   KF2ServerTools is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by      #
+#   the Free Software Foundation, either version 3 of the License, or         #
+#   (at your option) any later version.                                       #
+#                                                                             #
+#   KF2ServerTools is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
+#   GNU General Public License for more details.                              #
+#                                                                             #
+#   You should have received a copy of the GNU General Public License         #
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
+#                                                                             #
+# =========================================================================== #
 
-    # KF2ServerTools is free software: you can redistribute it and/or modify
-    # it under the terms of the GNU General Public License as published by
-    # the Free Software Foundation, either version 3 of the License, or
-    # (at your option) any later version.
-
-    # KF2ServerTools is distributed in the hope that it will be useful,
-    # but WITHOUT ANY WARRANTY; without even the implied warranty of
-    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    # GNU General Public License for more details.
-
-    # You should have received a copy of the GNU General Public License
-    # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-    
-# Discord: Rin#0304
 
 from maplist import MapList
 import argparse
@@ -32,6 +35,7 @@ from logging.handlers import RotatingFileHandler
 
 
 # TODO: ADD LOGGING AND BACKUPS
+
 
 def map_update_driver():
     """Driver
@@ -50,8 +54,10 @@ def map_update_driver():
 
     return
 
+
 def cmd_helper_driver():
     pass
+
 
 def damage_calc_driver():
     pass
@@ -72,7 +78,7 @@ if __name__ == "__main__":
         "updatemaps",
         help="Update server maps",
     )
-    
+
     cmd_parser = subparsers.add_parser(
         "cmd",
         help="Find and use commands",
@@ -87,5 +93,3 @@ if __name__ == "__main__":
             cmd_helper()
     except AttributeError:
         raise AttributeError
-    
-    

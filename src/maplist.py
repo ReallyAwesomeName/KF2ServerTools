@@ -1,43 +1,45 @@
 #
 # maplist.py
-#
 # MapList and MapObject classes
 #
+# Author: Rin | Discord: Rin#0304
 # https://github.com/ReallyAwesomeName/KF2ServerTools
+#
+# =========================================================================== #
+#                                                                             #
+#   KF2ServerTools - Tools for managing a Dedicated Killing Floor 2 Server    #
+#   Copyright (C) 2022  Rin                                                   #
+#                                                                             #
+#   This file is a part of KF2ServerTools                                     #
+#                                                                             #
+#   KF2ServerTools is free software: you can redistribute it and/or modify    #
+#   it under the terms of the GNU General Public License as published by      #
+#   the Free Software Foundation, either version 3 of the License, or         #
+#   (at your option) any later version.                                       #
+#                                                                             #
+#   KF2ServerTools is distributed in the hope that it will be useful,         #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
+#   GNU General Public License for more details.                              #
+#                                                                             #
+#   You should have received a copy of the GNU General Public License         #
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
+#                                                                             #
+# =========================================================================== #
 
-# KF2ServerTools - Tools for managing a Dedicated Killing Floor 2 Server
-# Copyright (C) 2022  Rin
 
-# This file is a part of KF2ServerTools
-
-# KF2ServerTools is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# KF2ServerTools is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-# Discord: Rin#0304
-
-
+from datetime import date
 import os
 
 
 class MapObject:
-    def __init__(
-        self, map_name="", map_type="", map_new=False, workshop_id=0) -> None:
+    def __init__(self, map_name="", map_type="", map_new=False, workshop_id=0) -> None:
         self.map_name = map_name
         self.map_type = map_type
         self.map_new = map_new
         self.workshop_id = workshop_id
         # TODO: make sure no extention
-        self.map_summary = f'[{self.map_name} KFMapSummary\nMapName={self.map_name}\n'
+        self.map_summary = f"[{self.map_name} KFMapSummary\nMapName={self.map_name}\n"
 
 
 class MapList:
@@ -137,12 +139,14 @@ class MapList:
         # Need to:
         #   Add entry to [OnlineSubsystemSteamworks.KFWorkshopSteamworks]
         #   ServerSubscribedWorkshopItems=1208883070 // 1 KF-Corridor
-        
+
         for new_map_index in range(len(self.new_maps)):
             new_map_id = getattr(self.new_maps[new_map_index], "workshop_id")
             new_map_name = getattr(self.new_maps[new_map_index], "map_name")
-            map_steamworks_entry = f'ServerSubscribedWorkshopItems={new_map_id} // {new_map_name}'
-            
+            map_steamworks_entry = (
+                f"ServerSubscribedWorkshopItems={new_map_id} // {new_map_name}"
+            )
+
             # TODO: copy file for backup then insert steamworks entry
 
         pass
@@ -172,12 +176,12 @@ class MapList:
         [print(f'"{x}"', end=",") for x in sorted(MapList.workshop_maps)]
         print("\n\n")
 
-    def update_map_db(maplist: MapList):
+    def update_map_db(self):
         """Update the db of current maps"""
 
         pass
 
-    def update_server_info(maplist: MapList):
+    def update_server_info(self):
         """Edit ServerInfo.md to reflect map list changes"""
 
         # FIXME: MAKE THIS EDIT THE FILE
@@ -206,11 +210,7 @@ class MapList:
         print()
 
         # print total number of maps
-        total = (
-            len(MapList.workshop_maps)
-            + len(MapList.lane_maps)
-            + len(MapList.official_maps)
-        )
+        total = len(MapList.workshop_maps) + len(MapList.official_maps)
 
         print(f"\nTotal Maps: {total}")
         print("```\n")

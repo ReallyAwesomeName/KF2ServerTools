@@ -9,5 +9,5 @@ Adding maps to a Killing Floor 2 Dedicated server requires subscribing to the wo
 ## Planned Additions
 
 1. CMD Helper - Provide easy access to various commands and class names. Make it so any idiot can easily use whatever kind of command they want.
-2. Damage Calculations - Using weapon, perk and skill choice, determine breakpoints for each ZED
-3. GUI?
+2. Damage Calculations - Using weapon, perk, skill choice, difficulty, and number of players, determine breakpoints for each ZED
+3. GUI *and* CLI

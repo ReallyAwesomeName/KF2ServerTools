@@ -1,6 +1,6 @@
 #
-# zed.py
-# Zed class
+# data.py
+# Database to store maps and stats
 #
 # Author: Rin | Discord: Rin#0304
 # https://github.com/ReallyAwesomeName/KF2ServerTools
@@ -28,5 +28,4 @@
 # =========================================================================== #
 
 
-class Zed:
-    pass
+import sqlite3
