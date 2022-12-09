@@ -46,11 +46,11 @@ def map_update_driver():
     Server_Maps.build_cur_map_list()
     Server_Maps.find_new_maps()
     Server_Maps.update_workshop_map_list()
-    update_kfengine(Server_Maps)
-    update_kfgame(Server_Maps)
-    update_server_info(Server_Maps)
-    update_map_db(Server_Maps)
-    push_server_info()
+    Server_Maps.update_kfengine(Server_Maps)
+    Server_Maps.update_kfgame(Server_Maps)
+    Server_Maps.update_server_info(Server_Maps)
+    Server_Maps.update_map_db(Server_Maps)
+    Server_Maps.push_server_info()
 
     return
 
