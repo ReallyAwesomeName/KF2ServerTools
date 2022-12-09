@@ -1,6 +1,6 @@
 #
 # zed.py
-# Zed class
+# Zed classes
 #
 # Author: Rin | Discord: Rin#0304
 # https://github.com/ReallyAwesomeName/KF2ServerTools
@@ -29,4 +29,104 @@
 
 
 class Zed:
-    pass
+    def __init__(self, num_players, difficulty) -> None:
+        self.num_players = num_players
+        self.difficulty = difficulty
+
+
+###### Trash Zeds ######
+class Trash(Zed):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Cyst(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class AlphaClot(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+        self.health = num_players * difficulty
+
+
+# NOTE: Inheritance
+class Rioter(AlphaClot):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Slasher(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Crawler(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Gorefast(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+# NOTE: Inheritance
+class Gorefiend(Gorefast):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Stalker(Trash):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+###### E.D.A.R Variants ######
+class Robot():
+    def __init__(self) -> None:
+        pass
+    
+
+###### Medium Zeds ######
+class Medium(Zed):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Bloat(Medium):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Husk(Medium):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Siren(Medium):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+###### Large Zeds ######
+class Large(Zed):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Scrake(Large):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+class Fleshpound(Large):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)
+
+
+# NOTE: Inheritance
+class QuarterPound(Fleshpound):
+    def __init__(self, num_players, difficulty) -> None:
+        super().__init__(num_players, difficulty)

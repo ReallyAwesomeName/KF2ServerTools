@@ -59,7 +59,11 @@ def cmd_helper_driver():
     pass
 
 
-def damage_calc_driver():
+def dmg_driver():
+    pass
+
+
+def gui_driver():
     pass
 
 
@@ -73,23 +77,40 @@ if __name__ == "__main__":
         dest="action",
     )
 
-    # action: updatemaps
+    # action: mapupdate
     newmap_parser = subparsers.add_parser(
-        "updatemaps",
+        "mapupdate",
         help="Update server maps",
     )
 
+    # action: cmd
     cmd_parser = subparsers.add_parser(
         "cmd",
         help="Find and use commands",
     )
 
+    dmg_parser = subparsers.add_parser(
+        "dmg",
+        help="Calculate weapon damage and breakpoints",
+    )
+
+    # action: gui
+    gui_parser = subparsers.add_parser(
+        "gui",
+        help="Open the GUI",
+    )
+
     args = parser.parse_args()
 
     try:
-        if args.action == "updatemaps":
+        if args.action == "mapupdate":
             map_update_driver()
         if args.action == "cmd":
-            cmd_helper()
+            cmd_helper_driver()
+        if args.action == "dmg":
+            dmg_driver()
+        if args.action == "gui":
+            gui_driver()
+
     except AttributeError:
         raise AttributeError
